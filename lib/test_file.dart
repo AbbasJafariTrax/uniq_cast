@@ -1,17 +1,64 @@
-import 'package:better_player/better_player.dart';
 import 'package:flutter/material.dart';
 
-class TestFile extends StatelessWidget {
+class TestFile extends StatefulWidget {
   static const routeName = "test_file_page";
 
   @override
+  State<TestFile> createState() => _TestFileState();
+}
+
+class _TestFileState extends State<TestFile> with TickerProviderStateMixin {
+  late AnimationController animationController;
+
+  @override
+  void initState() {
+    super.initState();
+    animationController = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: 1),
+    )
+      ..forward()
+      ..repeat(reverse: true);
+  }
+
+  @override
+  void dispose() {
+    animationController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return AspectRatio(
-      aspectRatio: 16 / 9,
-      child: BetterPlayer.network(
-        "https://mnmedias.api.telequebec.tv/m3u8/29880.m3u8",
-        betterPlayerConfiguration: const BetterPlayerConfiguration(
-          aspectRatio: 16 / 9,
+    return Scaffold(
+      body: Container(
+        color: Colors.blue,
+        child: Center(
+          child: AnimatedBuilder(
+            animation: animationController,
+            builder: (context, child) {
+              return Container(
+                decoration: ShapeDecoration(
+                  color: Colors.white.withOpacity(0.5),
+                  shape: CircleBorder(),
+                ),
+                child: Padding(
+                  padding: EdgeInsets.all(8.0 * animationController.value),
+                  child: child,
+                ),
+              );
+            },
+            child: Container(
+              decoration: ShapeDecoration(
+                color: Colors.white,
+                shape: CircleBorder(),
+              ),
+              child: IconButton(
+                onPressed: () {},
+                color: Colors.blue,
+                icon: Icon(Icons.calendar_today, size: 24),
+              ),
+            ),
+          ),
         ),
       ),
     );

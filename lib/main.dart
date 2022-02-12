@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
         scaffoldBackgroundColor: ConstantColor.scaffoldBG,
-        textTheme: TextTheme(
+        textTheme: const TextTheme(
           bodyText1: TextStyle(),
           bodyText2: TextStyle(),
         ).apply(
@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
           displayColor: Colors.white,
         ),
       ),
-      initialRoute: LoginPage.routeName,
+      initialRoute: ChannelsListPage.routeName,
       routes: {
         LoginPage.routeName: (context) => LoginPage(),
         ChannelsListPage.routeName: (context) => ChannelsListPage(),
