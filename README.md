@@ -25,8 +25,8 @@ Desktop, Android/iOS mobile, or web.
 * Manual login
 * Auto login
 * Logout
-* play video
-* check availability of video
+* Play video
+* Check availability of video
 
 ### Libraries & tools
 * [Toast](https://github.com/PonnamKarthik/FlutterToast "fluttertoast")
