@@ -6,8 +6,4 @@ final channelStateFuture = FutureProvider<List<ChannelModel>>((ref) async {
   return fetchChannels();
 });
 
-// final currentChannelStatus = FutureProvider<Map<String, String>>((ref) async {
-//   return fetchChannels();
-// });
-
 final currentChannelState = StateProvider((ref) => {});

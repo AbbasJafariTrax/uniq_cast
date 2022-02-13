@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uniq_cast_test/Pages/login_page.dart';
 import 'package:uniq_cast_test/general/constants.dart';
+import 'package:uniq_cast_test/general/my_shared_prefs.dart';
 import 'package:uniq_cast_test/pages/channels_list_page.dart';
+import 'package:uniq_cast_test/pages/splash_page.dart';
 import 'package:uniq_cast_test/test_file.dart';
 
 void main() {
-  runApp(ProviderScope(child: MyApp()));
-  // runApp(
-  //   MultiProvider(
-  //     providers: [
-  //       ChangeNotifierProvider(create: (_) => LoginState()),
-  //     ],
-  //     child: MyApp(),
-  //   ),
-  // );
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+      .then((_) {
+    runApp(ProviderScope(child: MyApp()));
+  });
 }
 
 class MyApp extends StatelessWidget {
@@ -34,11 +33,17 @@ class MyApp extends StatelessWidget {
           displayColor: Colors.white,
         ),
       ),
-      initialRoute: ChannelsListPage.routeName,
+      initialRoute: SplashPage.routeName,
+      // initialRoute: snapshot.connectionState == ConnectionState.waiting
+      //     ? SplashPage.routeName
+      //     : snapshot.data == ""
+      //         ? LoginPage.routeName
+      //         : ChannelsListPage.routeName,
       routes: {
         LoginPage.routeName: (context) => LoginPage(),
         ChannelsListPage.routeName: (context) => ChannelsListPage(),
         TestFile.routeName: (context) => TestFile(),
+        SplashPage.routeName: (context) => SplashPage(),
       },
     );
   }

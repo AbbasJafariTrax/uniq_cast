@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 showLoaderDialog(BuildContext context, String msg) {
   AlertDialog alert = AlertDialog(
     backgroundColor: Colors.black,
-    content: new Row(
+    content: Row(
       children: [
-        CircularProgressIndicator(),
+        const CircularProgressIndicator(),
         Container(
-          margin: EdgeInsets.only(left: 7),
+          margin: const EdgeInsets.only(left: 7),
           child: Text(
             msg,
-            style: TextStyle(color: Colors.white),
+            style: const TextStyle(color: Colors.white),
           ),
         ),
       ],

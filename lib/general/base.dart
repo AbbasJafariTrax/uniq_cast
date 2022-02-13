@@ -37,10 +37,10 @@ class Base {
         minHeight: minHeight,
         maxHeight: maxHeight,
       ),
-      padding: EdgeInsets.symmetric(vertical: 8),
+      padding: const EdgeInsets.symmetric(vertical: 8),
       child: TextFormField(
         controller: txtCtrl,
-        style: TextStyle(color: Colors.white),
+        style: const TextStyle(color: Colors.white),
         validator: (str) {
           if (txtCtrl.text.isEmpty) {
             return "Please enter your $label";
@@ -63,14 +63,14 @@ class Base {
   ElevatedButton myElevatedButton(
     String text, {
     required VoidCallback clickListener,
-    required Color text_color,
-    required Color button_color,
+    required Color textColor,
+    required Color buttonColor,
   }) {
     return ElevatedButton(
-      child: Text(text, style: TextStyle(color: text_color)),
+      child: Text(text, style: TextStyle(color: textColor)),
       onPressed: clickListener,
       style: ElevatedButton.styleFrom(
-        primary: button_color,
+        primary: buttonColor,
       ),
     );
   }
