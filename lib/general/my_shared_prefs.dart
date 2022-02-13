@@ -3,7 +3,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 class SharedPrefs {
   static const String _token = "x-token";
 
-  //---------------------------------------------------
   static Future<bool> setToken(String token) async {
     SharedPreferences _prefs = await SharedPreferences.getInstance();
     return _prefs.setString(_token, token);

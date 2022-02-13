@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class ConstantMessage {
-//Submission status message
   static const internetErrMsg =
       'Can\'t connect to Internet. Do you have switched on your WiFi or mobile data?';
   static const unknownErrMsg =
