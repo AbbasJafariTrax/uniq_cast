@@ -21,9 +21,11 @@ class ChannelsListPage extends StatefulWidget {
 class _ChannelsListPageState extends State<ChannelsListPage> {
   static BetterPlayerConfiguration betterPlayerConfiguration =
       const BetterPlayerConfiguration(
-    autoDispose: false,
+    autoDispose: true,
     aspectRatio: 16 / 9,
   );
+  BetterPlayerControlsConfiguration controlsConfiguration =
+      BetterPlayerControlsConfiguration();
 
   BetterPlayerController controller = BetterPlayerController(
     betterPlayerConfiguration,
@@ -57,7 +59,6 @@ class _ChannelsListPageState extends State<ChannelsListPage> {
           SizedBox(height: statusSize),
           Consumer(
             builder: (BuildContext context, WidgetRef ref, Widget? child) {
-              disposeCurrentVideo();
               return ref.watch(currentChannelState.state).state.isEmpty
                   ? const SizedBox.shrink()
                   : BetterPlayer.network(
@@ -108,7 +109,7 @@ class _ChannelsListPageState extends State<ChannelsListPage> {
                                         .read(currentChannelState.state)
                                         .state =
                                     {};
-                                    setState(() {});
+                                    disposeCurrentVideo();
                                   }
                                 },
                               ),
@@ -152,6 +153,13 @@ class _ChannelsListPageState extends State<ChannelsListPage> {
                                     isAvailable: currentItem.url != "",
                                   ),
                                   onTap: () {
+                                    if (ref
+                                        .read(currentChannelState.state)
+                                        .state
+                                        .isNotEmpty) {
+                                      print("Mahdi: testing");
+                                      disposeCurrentVideo();
+                                    }
 
                                     if (currentItem.url != "") {
                                       ref
@@ -167,7 +175,6 @@ class _ChannelsListPageState extends State<ChannelsListPage> {
                                         Colors.white,
                                       );
                                     }
-                                    setState(() {});
                                   },
                                 );
                               },
