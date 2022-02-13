@@ -34,11 +34,6 @@ class MyApp extends StatelessWidget {
         ),
       ),
       initialRoute: SplashPage.routeName,
-      // initialRoute: snapshot.connectionState == ConnectionState.waiting
-      //     ? SplashPage.routeName
-      //     : snapshot.data == ""
-      //         ? LoginPage.routeName
-      //         : ChannelsListPage.routeName,
       routes: {
         LoginPage.routeName: (context) => LoginPage(),
         ChannelsListPage.routeName: (context) => ChannelsListPage(),

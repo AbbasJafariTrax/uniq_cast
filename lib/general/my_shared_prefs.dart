@@ -6,11 +6,7 @@ class SharedPrefs {
   //---------------------------------------------------
   static Future<bool> setToken(String token) async {
     SharedPreferences _prefs = await SharedPreferences.getInstance();
-    if (token.isEmpty && token != '') {
-      return _prefs.setString(_token, token);
-    } else {
-      return _prefs.remove(_token);
-    }
+    return _prefs.setString(_token, token);
   }
 
   static Future<String> getToken() async {
@@ -25,7 +21,7 @@ class SharedPrefs {
   static Future<bool> clearToken() async {
     SharedPreferences _prefs = await SharedPreferences.getInstance();
     try {
-      _prefs.clear();
+      _prefs.remove(_token);
       return true;
     } catch (_) {
       return false;

@@ -39,9 +39,6 @@ class _ChannelsListPageState extends State<ChannelsListPage> {
 
   void disposeCurrentVideo() {
     /// Dispose the video controller after closing the video
-    // if (controller.isVideoInitialized() ?? false) {
-    //   controller.pause();
-    // }
     controller.videoPlayerController?.pause();
     controller.clearCache();
     controller.dispose();
