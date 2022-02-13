@@ -38,11 +38,12 @@ class _ChannelsListPageState extends State<ChannelsListPage> {
 
   void disposeCurrentVideo() {
     /// Dispose the video controller after closing the video
-    if (controller.controlsEnabled) {
-      controller.videoPlayerController?.pause();
-      controller.clearCache();
-      controller.dispose();
-    }
+    // if (controller.isVideoInitialized() ?? false) {
+    //   controller.pause();
+    // }
+    controller.videoPlayerController?.pause();
+    controller.clearCache();
+    controller.dispose();
   }
 
   @override
@@ -56,6 +57,7 @@ class _ChannelsListPageState extends State<ChannelsListPage> {
           SizedBox(height: statusSize),
           Consumer(
             builder: (BuildContext context, WidgetRef ref, Widget? child) {
+              disposeCurrentVideo();
               return ref.watch(currentChannelState.state).state.isEmpty
                   ? const SizedBox.shrink()
                   : BetterPlayer.network(
@@ -102,9 +104,11 @@ class _ChannelsListPageState extends State<ChannelsListPage> {
                                       .watch(currentChannelState.state)
                                       .state
                                       .isNotEmpty) {
-                                    ref.read(currentChannelState.state).state =
-                                        {};
-                                    disposeCurrentVideo();
+                                    ref
+                                        .read(currentChannelState.state)
+                                        .state =
+                                    {};
+                                    setState(() {});
                                   }
                                 },
                               ),
@@ -148,7 +152,6 @@ class _ChannelsListPageState extends State<ChannelsListPage> {
                                     isAvailable: currentItem.url != "",
                                   ),
                                   onTap: () {
-                                    disposeCurrentVideo();
 
                                     if (currentItem.url != "") {
                                       ref
@@ -164,6 +167,7 @@ class _ChannelsListPageState extends State<ChannelsListPage> {
                                         Colors.white,
                                       );
                                     }
+                                    setState(() {});
                                   },
                                 );
                               },

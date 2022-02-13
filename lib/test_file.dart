@@ -16,6 +16,7 @@ class _TestFileState extends State<TestFile> with TickerProviderStateMixin {
     animationController = AnimationController(
       vsync: this,
       duration: Duration(seconds: 1),
+      value: 16 / 9,
     )
       ..forward()
       ..repeat(reverse: true);
