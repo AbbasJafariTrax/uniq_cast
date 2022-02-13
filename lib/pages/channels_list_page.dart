@@ -56,19 +56,30 @@ class _ChannelsListPageState extends State<ChannelsListPage> {
         leading: Row(
           children: [
             SizedBox(width: deviceSize.width * 0.03),
-            InkWell(
-              child: const Icon(Icons.arrow_back_outlined),
-              onTap: () {
-                SharedPrefs.clearToken().then((value) {
-                  if (value) {
-                    Navigator.of(context).pushNamedAndRemoveUntil(
-                      LoginPage.routeName,
-                      (Route<dynamic> route) => false,
-                    );
-                  }
-                });
-              },
-            ),
+            Consumer(
+                builder: (BuildContext context, WidgetRef ref, Widget? child) {
+              return InkWell(
+                child: const Icon(Icons.arrow_back_outlined),
+                onTap: () {
+                  SharedPrefs.clearToken().then((value) {
+                    if (value) {
+                      /// Clear the currentChannelState map after closing video
+                      if (ref
+                          .watch(currentChannelState.state)
+                          .state
+                          .isNotEmpty) {
+                        ref.read(currentChannelState.state).state = {};
+                        disposeCurrentVideo();
+                      }
+                      Navigator.of(context).pushNamedAndRemoveUntil(
+                        LoginPage.routeName,
+                        (Route<dynamic> route) => false,
+                      );
+                    }
+                  });
+                },
+              );
+            }),
           ],
         ),
       ),

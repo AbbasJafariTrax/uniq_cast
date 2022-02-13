@@ -1,4 +1,4 @@
-package com.example.uniq_cast_test;
+package com.uniqcast.flutter_task;
 
 import io.flutter.embedding.android.FlutterActivity;
 
